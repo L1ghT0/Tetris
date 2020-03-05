@@ -25,9 +25,9 @@ public:
 	void setBoolMap(int x, int y, bool icon);
 
 private:
-	unsigned char icon;
+	short icon;
 	bool AddFigure;
 	bool mapBool[COORDINATE_Y][COORDINATE_X];
-	char map[COORDINATE_Y][COORDINATE_X];
+	short map[COORDINATE_Y][COORDINATE_X];
 
 };

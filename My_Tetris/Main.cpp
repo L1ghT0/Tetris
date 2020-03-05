@@ -1,42 +1,11 @@
-﻿//#include <iostream>
-#include <conio.h>
+﻿//#include <conio.h>
+//#include <Windows.h>
 #include <ctime>
-#include <Windows.h>
 #include <thread>
-#include "Figure.h"
 #include "Map.h"
-#include "L_Figure.h"
-#include "Back_L_Figure.h"
-#include "Z_Figure.h"
-#include "Back_Z_Figure.h"
 #include "GameLogic.h"
-#include "T_Figure.h"
-#include "Square_Figure.h"
-#include "Line_Figure.h"
-int randomForChoise;
-
-Figure* factory() {
-	randomForChoise = rand() % 7;
-	switch (randomForChoise)
-	{
-	case(0):
-		return new L_Figure();
-	case(1):
-		return new Back_L_Figure();
-	case(2):
-		return new Z_Figure();
-	case(3):
-		return new Back_Z_Figure();
-	case(4):
-		return new T_Figure();
-	case(5):
-		return new Square_Figure();
-	case(6):
-		return new Line_Figure();
-	default:
-		break;
-	}
-}
+#include "Figure.h"
+#include "Factory.h"
 
 
 int main()
@@ -48,7 +17,7 @@ int main()
 
 	Map map;
 	GameLogic gameLogic;
-	Figure* figure = factory();
+	Figure* figure = Factory::figures();
 	figure->push_figure();
 
 	std::thread th([&]()
@@ -68,7 +37,7 @@ int main()
 		{
 			map.saveFigureForMap(figure);
 			delete figure;
-			figure = factory();
+			figure = Factory::figures();
 			figure->push_figure();
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(300));

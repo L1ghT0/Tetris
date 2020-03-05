@@ -1,4 +1,5 @@
 #pragma once
+
 const int BOOL_ICON = 5;
 const int COORDINATE_F = 5;
 
@@ -9,8 +10,9 @@ public:
 	~Figure();
 
 	virtual void push_figure() = 0;
-	//virtual void addFigureCoordinates();
 	virtual void inverse(Figure* figure);
+	void setColor(int color);
+	int getColor();
 
 	struct
 	{
@@ -24,5 +26,8 @@ public:
 
 	int heightFigure;
 	int widthFigure;
+
+private:
+	int color;
 };
 

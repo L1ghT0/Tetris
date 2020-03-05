@@ -25,7 +25,6 @@ Figure::~Figure()
 {
 }
 
-
 void Figure::inverse(Figure* figure)
 {
 	int count = 0;
@@ -55,3 +54,12 @@ void Figure::inverse(Figure* figure)
 	figure->widthFigure = temp;
 }
 
+void Figure::setColor(int color)
+{
+	color == 7 ? this->color = (color+3) : this->color = color;	// "7" - defaults color
+}
+
+int Figure::getColor()
+{
+	return this->color;
+}

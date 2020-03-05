@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Back_L_Figure.cpp" />
     <ClCompile Include="Back_Z_Figure.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="Line_Figure.cpp" />
     <ClCompile Include="L_Figure.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="Back_L_Figure.h" />
     <ClInclude Include="Back_Z_Figure.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Line_Figure.h" />
     <ClInclude Include="L_Figure.h" />

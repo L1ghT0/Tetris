@@ -1,10 +1,7 @@
 #include "GameLogic.h"
 
 
-GameLogic::GameLogic()
-{
-}
-
+GameLogic::GameLogic(){}
 GameLogic::~GameLogic(){}
 
 bool GameLogic::shiftFigure(Figure* figure, Map* map, const int& heightFigure, int shiftX, int shiftY)

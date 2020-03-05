@@ -16,7 +16,7 @@ Map::~Map()
 
 }
 
-void Map::addOnMap(Figure* FigureOnMap)
+void Map::addOnMap(Figure* figure)
 {
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
@@ -41,9 +41,9 @@ void Map::addOnMap(Figure* FigureOnMap)
 				{
 					for (int l = 0; l < COORDINATE_F; l++)
 					{
-						if (i == FigureOnMap->coordinate[k].y && j == FigureOnMap->coordinate[l].x && FigureOnMap->ThisFigure[k][l].icon == 1)
+						if (i == figure->coordinate[k].y && j == figure->coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
 						{
-							map[i][j] = this->icon = 219;
+							map[i][j] = this->icon = 219 + 255*(figure->getColor());
 							AddFigure = true;
 						}
 					}
@@ -61,11 +61,21 @@ void Map::addOnMap(Figure* FigureOnMap)
 void Map::Print_map()
 {
 	system("cls");
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
 		for (int j = 0; j < COORDINATE_X; j++)
 		{
-			std::cout << map[i][j];
+			if (map[i][j] > 255)
+			{
+				char x = map[i][j] % 255;
+				int colorNum = map[i][j] / 255;
+				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | colorNum));
+				std::cout << x/*(char)(map[i][j] - 255)*/;
+				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));
+			}
+			else
+				std::cout << (char)map[i][j];
 		}
 		std::cout << std::endl;
 	}
