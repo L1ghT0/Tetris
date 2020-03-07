@@ -41,7 +41,7 @@ void Map::addOnMap(Figure* figure)
 				{
 					for (int l = 0; l < COORDINATE_F; l++)
 					{
-						if (i == figure->coordinate[k].y && j == figure->coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
+						if (i == figure->Coordinate[k].y && j == figure->Coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
 						{
 							map[i][j] = this->icon = 219 + 255*(figure->getColor());
 							AddFigure = true;
@@ -91,7 +91,7 @@ void Map::saveFigureForMap(Figure* figure)
 			{
 				for (int l = 0; l < COORDINATE_F; l++)
 				{
-					if (i == figure->coordinate[k].y && j == figure->coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
+					if (i == figure->Coordinate[k].y && j == figure->Coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
 					{
 						mapBool[i][j] = 1;
 					}

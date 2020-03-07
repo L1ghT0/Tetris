@@ -13,14 +13,14 @@ bool GameLogic::shiftFigure(Figure* figure, Map* map, const int& heightFigure, i
 		{
 			if (figure->ThisFigure[i][j].icon == true && figure->ThisFigure[i + (shiftY)][j].icon != true && shiftY)
 			{
-				if (map->getMap((figure->coordinate[i].y + (shiftY)), figure->coordinate[j].x) == ' ')
+				if (map->getMap((figure->Coordinate[i].y + (shiftY)), figure->Coordinate[j].x) == ' ')
 					checkNextLine = true;
 				else 
 					return false;
 			}
 			else if (figure->ThisFigure[i][j].icon == true && figure->ThisFigure[i][j + (shiftX)].icon != true && shiftX != 0)
 			{
-				if (map->getMap(figure->coordinate[i].y, figure->coordinate[j].x + (shiftX)) == ' ')
+				if (map->getMap(figure->Coordinate[i].y, figure->Coordinate[j].x + (shiftX)) == ' ')
 					checkNextLine = true;
 				else
 					return false;
@@ -30,14 +30,14 @@ bool GameLogic::shiftFigure(Figure* figure, Map* map, const int& heightFigure, i
 	if (checkNextLine && shiftY)
 	{
 		for (int i = 0; i < COORDINATE_F; i++)
-			figure->coordinate[i].y += shiftY;
+			figure->Coordinate[i].y += shiftY;
 
 		return true;
 	}
 	else if (checkNextLine && shiftX != 0)
 	{
 		for (int i = 0; i < COORDINATE_F; i++)
-			figure->coordinate[i].x += (shiftX);
+			figure->Coordinate[i].x += (shiftX);
 		return false;
 	}
 }
@@ -105,7 +105,9 @@ void GameLogic::input(bool& GameOver, Figure* figure, Map* map)
 		case 'q': 
 			figure->inverse(figure);
 			break;
-		case '`': GameOver = true; break;
+		case '`': 
+			GameOver = true; 
+			break;
 		}
 	}
 }

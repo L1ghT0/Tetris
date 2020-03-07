@@ -10,9 +10,6 @@ const int COORDINATE_Y = 20;
 class Map
 {
 public:
-	//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	//SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 1));    <- изменение цвета
-	//SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));    <- Вернуть в исходный цвет 
 
 	Map();
 	~Map();

@@ -5,19 +5,19 @@ Figure::Figure()
 {
 	heightFigure = 0;
 	widthFigure = 0;
-	for (int i = 0; i < BOOL_ICON; i++)
-		for (int j = 0; j < BOOL_ICON; j++)
+	for (int i = 0; i < COORDINATE_F; i++)
+		for (int j = 0; j < COORDINATE_F; j++)
 			ThisFigure[i][j].icon = 0;
 
 	for (int k = 0; k < COORDINATE_F; k++)
 	{
-		coordinate[k].x = 0;
-		coordinate[k].y = 0;
+		Coordinate[k].x = 0;
+		Coordinate[k].y = 0;
 	}
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
-		coordinate[i].x = (((COORDINATE_X / 2) + (COORDINATE_X / 2 / 4)) / 2) + i;
-		coordinate[i].y = i + 1;
+		Coordinate[i].x = (((COORDINATE_X / 2) + (COORDINATE_X / 2 / 4)) / 2) + i;
+		Coordinate[i].y = i + 1;
 	}
 }
 
@@ -28,18 +28,18 @@ Figure::~Figure()
 void Figure::inverse(Figure* figure)
 {
 	int count = 0;
-	bool bar[BOOL_ICON][BOOL_ICON];
-	for (int i = 0; i < BOOL_ICON; i++)
-		for (int j = 0; j < BOOL_ICON; j++)
+	bool bar[COORDINATE_F][COORDINATE_F];
+	for (int i = 0; i < COORDINATE_F; i++)
+		for (int j = 0; j < COORDINATE_F; j++)
 			bar[i][j] = figure->ThisFigure[i][j].icon;
 	
-	for (int i = 0; i < BOOL_ICON; i++)
-		for (int j = 0, k = BOOL_ICON - 1; j < BOOL_ICON; j++, k--)
+	for (int i = 0; i < COORDINATE_F; i++)
+		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--)
 				figure->ThisFigure[i][j].icon = bar[k][i];
 
-	for (int i = 0; i < BOOL_ICON; i++)	
+	for (int i = 0; i < COORDINATE_F; i++)
 	{
-		for (int j = 0; j < BOOL_ICON; j++)
+		for (int j = 0; j < COORDINATE_F; j++)
 		{
 			count = (COORDINATE_F - figure->heightFigure);
 			if (figure->ThisFigure[i][j].icon)

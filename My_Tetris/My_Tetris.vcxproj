@@ -127,11 +127,13 @@
     <ClCompile Include="Back_Z_Figure.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="Line_Figure.cpp" />
     <ClCompile Include="L_Figure.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PlayTetris.cpp" />
     <ClCompile Include="Square_Figure.cpp" />
     <ClCompile Include="T_Figure.cpp" />
     <ClCompile Include="Z_Figure.cpp" />
@@ -141,10 +143,12 @@
     <ClInclude Include="Back_Z_Figure.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameMenu.h" />
     <ClInclude Include="Line_Figure.h" />
     <ClInclude Include="L_Figure.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="PlayTetris.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Square_Figure.h" />
     <ClInclude Include="T_Figure.h" />
