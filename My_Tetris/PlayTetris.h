@@ -8,15 +8,16 @@
 
 class PlayTetris
 {
-protected:
+public:
 	PlayTetris();
-	void play(int difficulty);
+	int play(int difficulty);
+	int getScore() { return this->score; }
 
 private:
 	Map map;
 	GameLogic gameLogic;
 	bool GameOver = false;
 	bool checkFall = true;
-	int score = 0;
+	int score;
 };
 

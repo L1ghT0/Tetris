@@ -4,23 +4,23 @@
 GameLogic::GameLogic(){}
 GameLogic::~GameLogic(){}
 
-bool GameLogic::shiftFigure(Figure* figure, Map* map, const int& heightFigure, int shiftX, int shiftY)
+bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY)
 {
 	checkNextLine = false;
 	for (int i = 0; i < heightFigure; i++)
 	{
 		for (int j = 0; j < COORDINATE_F; j++)
 		{
-			if (figure->ThisFigure[i][j].icon == true && figure->ThisFigure[i + (shiftY)][j].icon != true && shiftY)
+			if (pFigure->ThisFigure[i][j].icon > 0 && pFigure->ThisFigure[i + (shiftY)][j].icon <= 0 && shiftY)
 			{
-				if (map->getMap((figure->Coordinate[i].y + (shiftY)), figure->Coordinate[j].x) == ' ')
+				if (pMap->getMap((pFigure->Coordinate[i].y + (shiftY)), pFigure->Coordinate[j].x) == ' ')
 					checkNextLine = true;
 				else 
 					return false;
 			}
-			else if (figure->ThisFigure[i][j].icon == true && figure->ThisFigure[i][j + (shiftX)].icon != true && shiftX != 0)
+			else if (pFigure->ThisFigure[i][j].icon > 0 && pFigure->ThisFigure[i][j + (shiftX)].icon <= 0 && shiftX != 0)
 			{
-				if (map->getMap(figure->Coordinate[i].y, figure->Coordinate[j].x + (shiftX)) == ' ')
+				if (pMap->getMap(pFigure->Coordinate[i].y, pFigure->Coordinate[j].x + (shiftX)) == ' ')
 					checkNextLine = true;
 				else
 					return false;
@@ -30,19 +30,18 @@ bool GameLogic::shiftFigure(Figure* figure, Map* map, const int& heightFigure, i
 	if (checkNextLine && shiftY)
 	{
 		for (int i = 0; i < COORDINATE_F; i++)
-			figure->Coordinate[i].y += shiftY;
-
+			pFigure->Coordinate[i].y += shiftY;
 		return true;
 	}
 	else if (checkNextLine && shiftX != 0)
 	{
 		for (int i = 0; i < COORDINATE_F; i++)
-			figure->Coordinate[i].x += (shiftX);
+			pFigure->Coordinate[i].x += (shiftX);
 		return false;
 	}
 }
 
-void GameLogic::lineDeletion(Map* map)	
+int GameLogic::lineDeletion(Map* pMap, int score)
 {
 	int count;
 	int countLineDel = 0;
@@ -52,12 +51,12 @@ void GameLogic::lineDeletion(Map* map)
 		count = 0;
 		for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4) + 1); j++)
 		{
-			map->getBoolMap(i, j) ? count++ : count = 0;
+			pMap->getFeguresMap(i, j) ? count++ : count = 0;
 			if (count == ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)-1))
 			{
 				while (j)
 				{
-					map->setBoolMap(i, j, 0);
+					pMap->setFeguresMap(i, j, 0);
 					--j;
 				}
 				countLineDel++;
@@ -66,6 +65,7 @@ void GameLogic::lineDeletion(Map* map)
 			}
 		}
 	}
+	score = GameLogic::increaseScore(countLineDel);
 	if (countLineDel)
 	{
 		while (countLineDel)
@@ -74,19 +74,20 @@ void GameLogic::lineDeletion(Map* map)
 			{
 				for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)+1); j++)
 				{
-					if (map->getBoolMap(i, j))
+					if (pMap->getFeguresMap(i, j) > 0)
 					{
-						map->setBoolMap(i, j, 0);
-						map->setBoolMap((i + 1), j, 1);
+						pMap->setFeguresMap((i + 1), j, pMap->getFeguresMap(i, j));
+						pMap->setFeguresMap(i, j, 0);
 					}
 				}
 			}
 			countLineDel--;
 		}
 	}
+	return score;
 }
 
-void GameLogic::input(bool& GameOver, Figure* figure, Map* map)
+void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
 {
 	if (_kbhit())
 	{	
@@ -94,20 +95,36 @@ void GameLogic::input(bool& GameOver, Figure* figure, Map* map)
 		switch (ch)
 		{
 		case 'a': 
-			GameLogic::shiftFigure(figure, map, figure->heightFigure, -1, 0);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, -1, 0);
 			break;
 		case 'd': 
-			GameLogic::shiftFigure(figure, map, figure->heightFigure, 1, 0);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, 1, 0);
 			break;
 		case 's': 
-			GameLogic::shiftFigure(figure, map, figure->heightFigure, 0, 1);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, 0, 1);
 			break;
 		case 'q': 
-			figure->inverse(figure);
+			pFigure->inverse(pFigure);
 			break;
 		case '`': 
 			GameOver = true; 
 			break;
 		}
 	}
+}
+
+int GameLogic::increaseScore(int lines)
+{
+	int res = 0;
+	for (int i = 0; i < lines; lines--)
+		res += (lines * 10);
+	return res;
+}
+
+bool GameLogic::gameover(Map* pMap, Figure* pFigure)
+{
+	for (int i = 0; i < COORDINATE_F; i++)
+		if (pMap->getFeguresMap(1, pFigure->Coordinate[i].x) > 0)
+			return true;
+	return false;
 }

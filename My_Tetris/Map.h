@@ -6,25 +6,25 @@
 const int COORDINATE_X = 22;
 const int COORDINATE_Y = 20;
 
-
 class Map
 {
 public:
 
 	Map();
 	~Map();
-	void addOnMap(Figure* FigureOnMap);
-	void Print_map();
-	void saveFigureForMap(Figure* figure);
+	void addOnMap(Figure* pFigure);
+	void Print_map(int score);
+	void saveFigureForMap(Figure* pFigure);
 	
 	char getMap(int x, int y);
-	bool getBoolMap(int x, int y);
-	void setBoolMap(int x, int y, bool icon);
+	short getFeguresMap(int x, int y);
+	void setFeguresMap(int x, int y, short icon);
 
 private:
 	short icon;
 	bool AddFigure;
-	bool mapBool[COORDINATE_Y][COORDINATE_X];
+	short mapFigures[COORDINATE_Y][COORDINATE_X];
 	short map[COORDINATE_Y][COORDINATE_X];
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 };

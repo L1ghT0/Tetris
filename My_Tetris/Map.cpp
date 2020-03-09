@@ -8,7 +8,7 @@ Map::Map()
 	
 	for (int i = 0; i < COORDINATE_Y; i++)
 		for (int j = 0; j < COORDINATE_X; j++)
-			mapBool[i][j] = 0;
+			mapFigures[i][j] = 0;
 }
 
 Map::~Map()
@@ -16,24 +16,28 @@ Map::~Map()
 
 }
 
-void Map::addOnMap(Figure* figure)
+void Map::addOnMap(Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
 		for (int j = 0; j < COORDINATE_X; j++)
 		{
-			for (int n = 0; n < COORDINATE_Y; n++)
-				for (int m = 0; m < COORDINATE_X; m++)
-					if (mapBool[n][m])
-						map[n][m] = this->icon = 219;
-
-			if (i == 0)
+			if (mapFigures[i][j] > 0)
 			{
-				map[i][j] = this->icon = 220;
+				map[i][j] = this->icon = 219 + 255 * mapFigures[i][j];
+				AddFigure = true;
 			}
-			else if (j == 0 || j == ((COORDINATE_X/2)+ ((COORDINATE_X / 2)/4)) || j == (COORDINATE_X-1) || i == (COORDINATE_Y-1))
-			{
+			if (i == 0)
+				map[i][j] = this->icon = 220;
+			else if (j == 0 || j == ((COORDINATE_X/2)+ ((COORDINATE_X / 2)/4))/*(14)*/ || j == (COORDINATE_X-1) || i == (COORDINATE_Y-1))
 				map[i][j] = this->icon = 219;
+			else if (i == (COORDINATE_Y/6) && j > ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)) && j < (COORDINATE_X - 1))
+			{
+				int widthOutMap = (COORDINATE_X - 1) - ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4));
+				int numOfLettersScore = 5;
+				widthOutMap = ((widthOutMap - numOfLettersScore)/2);
+				for (int k = 0; k < widthOutMap; k++)
+					map[i][j] = ' ';
 			}
 			else
 			{
@@ -41,9 +45,9 @@ void Map::addOnMap(Figure* figure)
 				{
 					for (int l = 0; l < COORDINATE_F; l++)
 					{
-						if (i == figure->Coordinate[k].y && j == figure->Coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
+						if (i == pFigure->Coordinate[k].y && j == pFigure->Coordinate[l].x && pFigure->ThisFigure[k][l].icon > 0)
 						{
-							map[i][j] = this->icon = 219 + 255*(figure->getColor());
+							map[i][j] = this->icon = 219 + 255*(pFigure->getColor());
 							AddFigure = true;
 						}
 					}
@@ -58,20 +62,18 @@ void Map::addOnMap(Figure* figure)
 	}
 }
 
-void Map::Print_map()
+void Map::Print_map(int score)
 {
 	system("cls");
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
 		for (int j = 0; j < COORDINATE_X; j++)
 		{
-			if (map[i][j] > 255)
+			if (map[i][j] > 255 || mapFigures[i][j] > 0)
 			{
-				char x = map[i][j] % 255;
 				int colorNum = map[i][j] / 255;
 				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | colorNum));
-				std::cout << x/*(char)(map[i][j] - 255)*/;
+				std::cout << (char)(map[i][j] % 255);
 				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));
 			}
 			else
@@ -79,9 +81,10 @@ void Map::Print_map()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << score << std::endl;
 }
 
-void Map::saveFigureForMap(Figure* figure)
+void Map::saveFigureForMap(Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
@@ -91,9 +94,9 @@ void Map::saveFigureForMap(Figure* figure)
 			{
 				for (int l = 0; l < COORDINATE_F; l++)
 				{
-					if (i == figure->Coordinate[k].y && j == figure->Coordinate[l].x && figure->ThisFigure[k][l].icon == 1)
+					if (i == pFigure->Coordinate[k].y && j == pFigure->Coordinate[l].x && pFigure->ThisFigure[k][l].icon > 0)
 					{
-						mapBool[i][j] = 1;
+						mapFigures[i][j] = pFigure->getColor();
 					}
 				}
 			}
@@ -106,13 +109,13 @@ char Map::getMap(int y, int x)
 	return this->map[y][x];
 }
 
-bool Map::getBoolMap(int y, int x)
+short Map::getFeguresMap(int y, int x)
 {
-	return this->mapBool[y][x];
+	return this->mapFigures[y][x];
 }
 
-void Map::setBoolMap(int y, int x, bool icon)
+void Map::setFeguresMap(int y, int x, short icon)
 {
-	this->mapBool[y][x] = icon;
+	this->mapFigures[y][x] = icon;
 }
 

@@ -9,10 +9,10 @@ Figure::Figure()
 		for (int j = 0; j < COORDINATE_F; j++)
 			ThisFigure[i][j].icon = 0;
 
-	for (int k = 0; k < COORDINATE_F; k++)
+	for (int i = 0; i < COORDINATE_F; i++)
 	{
-		Coordinate[k].x = 0;
-		Coordinate[k].y = 0;
+		Coordinate[i].x = 0;
+		Coordinate[i].y = 0;
 	}
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
@@ -21,37 +21,33 @@ Figure::Figure()
 	}
 }
 
-Figure::~Figure()
-{
-}
-
-void Figure::inverse(Figure* figure)
+void Figure::inverse(Figure* pFigure)
 {
 	int count = 0;
-	bool bar[COORDINATE_F][COORDINATE_F];
+	short bar[COORDINATE_F][COORDINATE_F];
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0; j < COORDINATE_F; j++)
-			bar[i][j] = figure->ThisFigure[i][j].icon;
+			bar[i][j] = pFigure->ThisFigure[i][j].icon;
 	
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--)
-				figure->ThisFigure[i][j].icon = bar[k][i];
+			pFigure->ThisFigure[i][j].icon = bar[k][i];
 
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
 		for (int j = 0; j < COORDINATE_F; j++)
 		{
-			count = (COORDINATE_F - figure->heightFigure);
-			if (figure->ThisFigure[i][j].icon)
+			count = (COORDINATE_F - pFigure->heightFigure);
+			if (pFigure->ThisFigure[i][j].icon)
 			{
-				figure->ThisFigure[i][j-count].icon = 1;
-				figure->ThisFigure[i][j].icon = 0;
+				pFigure->ThisFigure[i][j-count].icon = 219 + 255 * (getColor());
+				pFigure->ThisFigure[i][j].icon = 0;
 			}
 		}
 	}
-	int temp = figure->heightFigure;
-	figure->heightFigure = figure->widthFigure;
-	figure->widthFigure = temp;
+	int temp = pFigure->heightFigure;
+	pFigure->heightFigure = pFigure->widthFigure;
+	pFigure->widthFigure = temp;
 }
 
 void Figure::setColor(int color)
@@ -63,3 +59,4 @@ int Figure::getColor()
 {
 	return this->color;
 }
+

@@ -10,5 +10,5 @@ void Square_Figure::push_figure()
 {
 	for (int i = 0; i < heightFigure; i++)
 		for (int j = 0; j < widthFigure; j++)
-			ThisFigure[i][j].icon = 1;
+			ThisFigure[i][j].icon = 219 + 255 * (getColor());
 }

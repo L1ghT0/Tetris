@@ -7,34 +7,37 @@ PlayTetris::PlayTetris()
 	score = 0;
 }
 
-void PlayTetris::play(int difficulty)
+int PlayTetris::play(int difficulty)
 {
-	Figure* figure = Factory::figures();
-	figure->push_figure();
+	difficulty = 450 - (difficulty * 95);
+	Figure* pFigure = Factory::figures();
+	pFigure->push_figure();
 
 	std::thread th([&]()
 		{
-			while (true)
+			while (!GameOver)
 			{
-				gameLogic.input(GameOver, figure, &map);
-				map.addOnMap(figure);
-				map.Print_map();
+				gameLogic.input(GameOver, pFigure, &map);
+				map.addOnMap(pFigure);
+				map.Print_map(this->score);
 			}
 		});
-	th.detach();
-
 	while (!GameOver)
 	{
 		if (!checkFall)
 		{
-			map.saveFigureForMap(figure);
-			delete figure;
-			figure = Factory::figures();
-			figure->push_figure();
+			map.saveFigureForMap(pFigure);
+			delete pFigure;
+			pFigure = Factory::figures();
+			pFigure->push_figure();
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-		checkFall = gameLogic.shiftFigure(figure, &map, figure->heightFigure, 0, 1);
-		gameLogic.lineDeletion(&map);
-
+		GameOver = gameLogic.gameover(&map, pFigure);
+		std::this_thread::sleep_for(std::chrono::milliseconds(difficulty));
+		checkFall = gameLogic.shiftFigure(pFigure, &map, pFigure->heightFigure, 0, 1);
+		this->score += gameLogic.lineDeletion(&map, score);
 	}
+	th.join();
+	system("pause");
+	system("cls");
+	return this->score;
 }

@@ -10,6 +10,6 @@ Back_L_Figure::Back_L_Figure()
 void Back_L_Figure::push_figure()
 {
 	for (int i = 0; i < heightFigure; i++)
-		ThisFigure[i][1].icon = 1;
-	ThisFigure[2][0].icon = 1;
+		ThisFigure[i][1].icon = 219 + 255 * (getColor());
+	ThisFigure[2][0].icon = 219 + 255 * (getColor());
 }

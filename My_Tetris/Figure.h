@@ -5,17 +5,16 @@ class Figure
 {
 public:
 	Figure();
-	~Figure();
 
 	virtual void push_figure() = 0;
-	virtual void inverse(Figure* figure);
+	virtual void inverse(Figure* pFigure);
 	void setColor(int color);
 	int getColor();
 
 	struct
 	{
-		bool icon;
-	} ThisFigure[COORDINATE_F][COORDINATE_F];
+		short icon;
+	}ThisFigure[COORDINATE_F][COORDINATE_F];
 	struct 
 	{
 		int x;

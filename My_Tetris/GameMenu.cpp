@@ -5,8 +5,9 @@ GameMenu::GameMenu()
 	this->input = 0;
 	this->count = 0;
 	this->itMenu = true;
+	path = "Story of the score.txt";
 	vMenu.push_back("New Game");
-	vMenu.push_back("The best");
+	vMenu.push_back("Story of the score");
 	vMenu.push_back("Exit");
 	vDifficulty.push_back("Easy");
 	vDifficulty.push_back("Normal");
@@ -72,7 +73,7 @@ void GameMenu::checkInput(std::vector<std::string> vec)
 	}
 	else if (count == 1 && input == 13 && itMenu)
 	{
-		std::cout << "its menu, count = 1" << std::endl;
+		GameMenu::readFile();
 		system("pause");
 	}
 	else if (count == (vec.size() - 1) && input == 13 && itMenu)
@@ -80,7 +81,9 @@ void GameMenu::checkInput(std::vector<std::string> vec)
 	else if (count != (vec.size() - 1) && input == 13 && !itMenu)
 	{
 		int difficulty = count;
-		PlayTetris::play(difficulty);
+		PlayTetris tetris;
+		int score = tetris.play(difficulty);
+		GameMenu::writeToFile(score);
 	}
 	else if (count == (vec.size() - 1) && input == 13 && !itMenu)
 	{
@@ -92,5 +95,44 @@ void GameMenu::checkInput(std::vector<std::string> vec)
 		this->count = 0;
 	else if (count < 0)
 		this->count = (vec.size() - 1);
+}
+
+void GameMenu::writeToFile(int score)
+{
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	if (!fout.is_open())
+	{
+		system("cls");
+		std::cout << "file open error" << std::endl;
+		system("pause");
+	}
+	else
+		fout << "Score: " << score << "\n";
+	fout.close();
+}
+
+void GameMenu::readFile()
+{
+	system("cls");
+	std::ifstream fin;
+	fin.open(path);
+	if (!fin.is_open())
+	{
+		system("cls");
+		std::cout << "file open error" << std::endl;
+		system("pause");
+	}
+	else
+	{
+		std::string str;
+		while (!fin.eof())
+		{
+			str = "";
+			getline(fin, str);
+			std::cout << str << std::endl;
+		}
+	}
+	fin.close();
 }
 
