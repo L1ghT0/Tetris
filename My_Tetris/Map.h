@@ -14,9 +14,9 @@ public:
 	~Map();
 	void addOnMap(Figure* pFigure);
 	void Print_map(int score);
-	void saveFigureForMap(Figure* pFigure);
+	void saveFigureOnMap(Figure* pFigure);
 	
-	char getMap(int x, int y);
+	short getMap(int x, int y);
 	short getFeguresMap(int x, int y);
 	void setFeguresMap(int x, int y, short icon);
 
@@ -26,5 +26,4 @@ private:
 	short mapFigures[COORDINATE_Y][COORDINATE_X];
 	short map[COORDINATE_Y][COORDINATE_X];
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
 };

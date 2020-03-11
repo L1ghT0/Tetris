@@ -4,8 +4,8 @@
 #include <conio.h>
 #include <string>
 #include <vector>
-#include "PlayTetris.h"
 #include <fstream>
+#include "PlayTetris.h"
 
 class GameMenu : public PlayTetris
 {
@@ -24,8 +24,8 @@ private:
 	char input;
 	int count;
 	bool itMenu;
-	std::string path;
 
+	std::string path;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::vector<std::string> vMenu;
 	std::vector<std::string> vDifficulty;

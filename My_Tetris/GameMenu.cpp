@@ -76,8 +76,10 @@ void GameMenu::checkInput(std::vector<std::string> vec)
 		GameMenu::readFile();
 		system("pause");
 	}
-	else if (count == (vec.size() - 1) && input == 13 && itMenu)
+	else if (count == (vec.size() - 1) && input == 13 && itMenu) 
+	{
 		this->input = '`';
+	}
 	else if (count != (vec.size() - 1) && input == 13 && !itMenu)
 	{
 		int difficulty = count;

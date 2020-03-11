@@ -31,14 +31,6 @@ void Map::addOnMap(Figure* pFigure)
 				map[i][j] = this->icon = 220;
 			else if (j == 0 || j == ((COORDINATE_X/2)+ ((COORDINATE_X / 2)/4))/*(14)*/ || j == (COORDINATE_X-1) || i == (COORDINATE_Y-1))
 				map[i][j] = this->icon = 219;
-			else if (i == (COORDINATE_Y/6) && j > ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)) && j < (COORDINATE_X - 1))
-			{
-				int widthOutMap = (COORDINATE_X - 1) - ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4));
-				int numOfLettersScore = 5;
-				widthOutMap = ((widthOutMap - numOfLettersScore)/2);
-				for (int k = 0; k < widthOutMap; k++)
-					map[i][j] = ' ';
-			}
 			else
 			{
 				for (int k = 0; k < COORDINATE_F; k++)
@@ -84,7 +76,7 @@ void Map::Print_map(int score)
 	std::cout << score << std::endl;
 }
 
-void Map::saveFigureForMap(Figure* pFigure)
+void Map::saveFigureOnMap(Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_Y; i++)
 	{
@@ -104,7 +96,7 @@ void Map::saveFigureForMap(Figure* pFigure)
 	}
 }
 
-char Map::getMap(int y, int x)
+short Map::getMap(int y, int x)
 {
 	return this->map[y][x];
 }

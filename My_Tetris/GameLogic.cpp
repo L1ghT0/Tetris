@@ -41,50 +41,54 @@ bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
 	}
 }
 
-int GameLogic::lineDeletion(Map* pMap, int score)
+void GameLogic::lowerTheMap(Map* pMap, int numOfLine)
 {
-	int count;
-	int countLineDel = 0;
-	int numOfLine = 0;
-	for (int i = 0; i < COORDINATE_Y; i++)
+	for (int i = numOfLine; i != 0; i--)
 	{
-		count = 0;
+		for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)+1); j++)
+		{
+			if (pMap->getFeguresMap(i, j) > 0)
+			{
+				pMap->setFeguresMap((i + 1), j, pMap->getFeguresMap(i, j));
+				pMap->setFeguresMap(i, j, 0);
+			}
+		}
+	}
+}
+
+int GameLogic::LineDeletion(Map* pMap, int& countLines)
+{
+	int countIconsInLine = 0;
+	for (int i = 1; i < COORDINATE_Y; i++)
+	{
+		countIconsInLine = 0;
 		for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4) + 1); j++)
 		{
-			pMap->getFeguresMap(i, j) ? count++ : count = 0;
-			if (count == ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)-1))
+			pMap->getFeguresMap(i, j) ? countIconsInLine++ : countIconsInLine = 0;
+			if (countIconsInLine == ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4) - 1))
 			{
 				while (j)
 				{
 					pMap->setFeguresMap(i, j, 0);
 					--j;
 				}
-				countLineDel++;
-				numOfLine = i;
-				break;
+				countLines++;
+				return i;
 			}
 		}
 	}
-	score = GameLogic::increaseScore(countLineDel);
-	if (countLineDel)
-	{
-		while (countLineDel)
-		{
-			for (int i = numOfLine; i != 0; i--)
-			{
-				for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)+1); j++)
-				{
-					if (pMap->getFeguresMap(i, j) > 0)
-					{
-						pMap->setFeguresMap((i + 1), j, pMap->getFeguresMap(i, j));
-						pMap->setFeguresMap(i, j, 0);
-					}
-				}
-			}
-			countLineDel--;
-		}
-	}
-	return score;
+	return 0;
+}
+
+int GameLogic::lineRemovalAssembly(Map* pMap)
+{
+	int numOfLine = 0;
+	int countLines = 0;
+	do {
+		numOfLine = GameLogic::LineDeletion(pMap, countLines);
+		GameLogic::lowerTheMap(pMap, numOfLine);
+	} while (numOfLine);
+	return GameLogic::increaseScore(countLines);
 }
 
 void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
@@ -124,7 +128,8 @@ int GameLogic::increaseScore(int lines)
 bool GameLogic::gameover(Map* pMap, Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_F; i++)
-		if (pMap->getFeguresMap(1, pFigure->Coordinate[i].x) > 0)
-			return true;
+		for (int j = pFigure->heightFigure; j > 0 ; j--)
+			if (pMap->getFeguresMap(j, pFigure->Coordinate[i].x) > 0)
+				return true;
 	return false;
 }

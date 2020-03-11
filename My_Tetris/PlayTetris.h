@@ -11,7 +11,6 @@ class PlayTetris
 public:
 	PlayTetris();
 	int play(int difficulty);
-	int getScore() { return this->score; }
 
 private:
 	Map map;
