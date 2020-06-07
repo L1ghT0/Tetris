@@ -1,7 +1,7 @@
 #pragma once
-#include "Figure.h"
-#include "Map.h"
-#include<conio.h>
+#include "../Figuries/Figure.h"
+#include "../Map/Map.h"
+#include "../OsHelper.h"
 
 class GameLogic
 {

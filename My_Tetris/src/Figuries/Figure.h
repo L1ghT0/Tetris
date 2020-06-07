@@ -5,12 +5,12 @@ class Figure
 {
 public:
 	Figure();
-
+    // add Destructor for deleted figure
 	virtual void push_figure() = 0;
-	virtual void inverse(Figure* pFigure);
+	void inverse(Figure* pFigure);
 	void setColor(int color);
 	int getColor();
-
+	// need new method: Figure* createFigure();
 	struct
 	{
 		short icon;
@@ -21,8 +21,8 @@ public:
 		int y;
 	}Coordinate[COORDINATE_F];
 
-	int heightFigure;
-	int widthFigure;
+	int heightFigure;   // add getter
+	int widthFigure;    // add getter
 
 private:
 	int color;

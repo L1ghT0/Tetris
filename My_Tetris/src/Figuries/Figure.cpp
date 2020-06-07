@@ -1,5 +1,5 @@
 #include "Figure.h"
-#include "Map.h"
+#include "../Map/Map.h"
 
 Figure::Figure()
 {
@@ -16,13 +16,13 @@ Figure::Figure()
 	}
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
-		Coordinate[i].x = (((COORDINATE_X / 2) + (COORDINATE_X / 2 / 4)) / 2) + i;
+		Coordinate[i].x = (((G_COORDINATE_X / 2) + (G_COORDINATE_X / 2 / 4)) / 2) + i;
 		Coordinate[i].y = i + 1;
 	}
 }
 
 void Figure::inverse(Figure* pFigure)
-{
+{   // Fix inverse
 	int count = 0;
 	short bar[COORDINATE_F][COORDINATE_F];
 	for (int i = 0; i < COORDINATE_F; i++)

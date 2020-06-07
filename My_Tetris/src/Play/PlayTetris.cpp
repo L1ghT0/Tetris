@@ -12,15 +12,16 @@ int PlayTetris::play(int difficulty)
 	difficulty = 450 - (difficulty * 95);
 	Figure* pFigure = Factory::figures();
 	pFigure->push_figure();
-	std::thread th([&]()
-		{
-			while (!GameOver)
-			{
-				gameLogic.input(GameOver, pFigure, &map);
-				map.addOnMap(pFigure);
-				map.Print_map(this->score);
-			}
-		});
+
+	std::thread th([&](){
+        while (!GameOver)
+        {
+            gameLogic.input(GameOver, pFigure, &map);
+            map.addOnMap(pFigure);
+            map.Print_map(this->score);
+        }
+	});
+
 	while (!GameOver)
 	{
 		if (!checkFall)
@@ -37,6 +38,14 @@ int PlayTetris::play(int difficulty)
 	}
 	th.join();
 	system("pause");
-	system("cls");
+	OsHelper::m_sysCLaer();
 	return this->score;
 }
+
+
+void PlayTetris::foo(int x) {
+
+}
+
+
+

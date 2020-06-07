@@ -6,21 +6,16 @@ Map::Map()
 	icon = 220;
 	AddFigure = false;
 	
-	for (int i = 0; i < COORDINATE_Y; i++)
-		for (int j = 0; j < COORDINATE_X; j++)
+	for (int i = 0; i < G_COORDINATE_Y; i++)
+		for (int j = 0; j < G_COORDINATE_X; j++)
 			mapFigures[i][j] = 0;
-}
-
-Map::~Map()
-{
-
 }
 
 void Map::addOnMap(Figure* pFigure)
 {
-	for (int i = 0; i < COORDINATE_Y; i++)
+	for (int i = 0; i < G_COORDINATE_Y; i++)
 	{
-		for (int j = 0; j < COORDINATE_X; j++)
+		for (int j = 0; j < G_COORDINATE_X; j++)
 		{
 			if (mapFigures[i][j] > 0)
 			{
@@ -29,7 +24,7 @@ void Map::addOnMap(Figure* pFigure)
 			}
 			if (i == 0)
 				map[i][j] = this->icon = 220;
-			else if (j == 0 || j == ((COORDINATE_X/2)+ ((COORDINATE_X / 2)/4))/*(14)*/ || j == (COORDINATE_X-1) || i == (COORDINATE_Y-1))
+			else if (j == 0 || j == G_CENTER_OF_MAP || j == (G_COORDINATE_X-1) || i == (G_COORDINATE_Y-1))
 				map[i][j] = this->icon = 219;
 			else
 			{
@@ -56,18 +51,18 @@ void Map::addOnMap(Figure* pFigure)
 
 void Map::Print_map(int score)
 {
-	system("cls");
-	for (int i = 0; i < COORDINATE_Y; i++)
+	OsHelper::m_sysCLaer();
+	for (int i = 0; i < G_COORDINATE_Y; i++)
 	{
-		for (int j = 0; j < COORDINATE_X; j++)
+		for (int j = 0; j < G_COORDINATE_X; j++)
 		{
 			if (map[i][j] > 255 || mapFigures[i][j] > 0)
 			{
-				int colorNum = map[i][j] / 255;
-				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | colorNum));
-				std::cout << (char)(map[i][j] % 255);
-				SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));
-			}
+			        int colorNum = map[i][j] / 255;
+			        OsHelper::change_color(0, colorNum);
+				    std::cout << (char)(map[i][j] % 255);
+				    OsHelper::reset_color();
+            }
 			else
 				std::cout << (char)map[i][j];
 		}
@@ -78,9 +73,9 @@ void Map::Print_map(int score)
 
 void Map::saveFigureOnMap(Figure* pFigure)
 {
-	for (int i = 0; i < COORDINATE_Y; i++)
+	for (int i = 0; i < G_COORDINATE_Y; i++)
 	{
-		for (int j = 0; j < COORDINATE_X; j++)
+		for (int j = 0; j < G_COORDINATE_X; j++)
 		{
 			for (int k = 0; k < COORDINATE_F; k++)
 			{
@@ -96,17 +91,17 @@ void Map::saveFigureOnMap(Figure* pFigure)
 	}
 }
 
-short Map::getMap(int y, int x)
+short Map::getMap(const int y, const int x)
 {
 	return this->map[y][x];
 }
 
-short Map::getFeguresMap(int y, int x)
+short Map::getFiguresMap(const int y, const int x)
 {
 	return this->mapFigures[y][x];
 }
 
-void Map::setFeguresMap(int y, int x, short icon)
+void Map::setFiguresMap(const int y, const int x, const short icon)
 {
 	this->mapFigures[y][x] = icon;
 }

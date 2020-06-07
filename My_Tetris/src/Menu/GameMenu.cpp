@@ -1,5 +1,5 @@
 #include "GameMenu.h"
-
+//#include <cstdio>
 GameMenu::GameMenu()
 {
 	this->input = 0;
@@ -20,8 +20,8 @@ void GameMenu::mainMenu()
 	GameMenu::print(vMenu);
 	while (input != '`')
 	{
-		input = _getch();
-		if (input == 's' || input == 'w' || input == 13) 
+		input = OsHelper::m_getch();
+		if (input == 's' || input == 'w' || input == OsHelper::enter)
 		{
 			if (itMenu)
 				GameMenu::checkInput(vMenu);
@@ -37,14 +37,14 @@ void GameMenu::mainMenu()
 
 void GameMenu::print(std::vector<std::string> vec)
 {
-	system("cls");
+    OsHelper::m_sysCLaer();
 	for (int i = 0; i < vec.size(); i++)
 	{
 		if (count == i)
 		{
-			SetConsoleTextAttribute(hConsole, (WORD)((7 << 4) | 0));
-			std::cout << vec[i] << std::endl;
-			SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));
+		    OsHelper::change_color(7, 0);
+			std::cout << vec[i] << " <--" << std::endl;
+			OsHelper::change_color(0, 7);
 		}
 		else
 			std::cout << vec[i] << std::endl;
@@ -53,9 +53,7 @@ void GameMenu::print(std::vector<std::string> vec)
 
 void GameMenu::choice(std::vector<std::string> vec)
 {
-	if (vec == vMenu)
-		GameMenu::print(vec);
-	else if (vec == vDifficulty)
+	if (vec == vMenu || vec == vDifficulty)
 		GameMenu::print(vec);
 }
 
@@ -66,28 +64,28 @@ void GameMenu::checkInput(std::vector<std::string> vec)
 	else if (input == 'w')
 		this->count--;
 	
-	if (count == 0 && input == 13 && itMenu)
+	if (count == 0 && input == OsHelper::enter && itMenu)
 	{
 		count = 0;
 		itMenu = false;
 	}
-	else if (count == 1 && input == 13 && itMenu)
+	else if (count == 1 && input == OsHelper::enter && itMenu)
 	{
 		GameMenu::readFile();
 		system("pause");
 	}
-	else if (count == (vec.size() - 1) && input == 13 && itMenu) 
+	else if (count == (vec.size() - 1) && input == OsHelper::enter && itMenu)
 	{
 		this->input = '`';
 	}
-	else if (count != (vec.size() - 1) && input == 13 && !itMenu)
+	else if (count != (vec.size() - 1) && input == OsHelper::enter && !itMenu)
 	{
 		int difficulty = count;
 		PlayTetris tetris;
 		int score = tetris.play(difficulty);
 		GameMenu::writeToFile(score);
 	}
-	else if (count == (vec.size() - 1) && input == 13 && !itMenu)
+	else if (count == (vec.size() - 1) && input == OsHelper::enter && !itMenu)
 	{
 		count = 0;
 		itMenu = true;
@@ -105,8 +103,8 @@ void GameMenu::writeToFile(int score)
 	fout.open(path, std::ofstream::app);
 	if (!fout.is_open())
 	{
-		system("cls");
-		std::cout << "file open error" << std::endl;
+        OsHelper::m_sysCLaer();
+        std::cout << "file open error" << std::endl;
 		system("pause");
 	}
 	else
@@ -116,12 +114,12 @@ void GameMenu::writeToFile(int score)
 
 void GameMenu::readFile()
 {
-	system("cls");
+	OsHelper::m_sysCLaer();
 	std::ifstream fin;
 	fin.open(path);
 	if (!fin.is_open())
 	{
-		system("cls");
+        OsHelper::m_sysCLaer();
 		std::cout << "file open error" << std::endl;
 		system("pause");
 	}

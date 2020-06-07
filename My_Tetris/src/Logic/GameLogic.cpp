@@ -4,7 +4,8 @@
 GameLogic::GameLogic(){}
 GameLogic::~GameLogic(){}
 
-bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY)
+bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
+                            const int shiftX, const int shiftY)
 {
 	checkNextLine = false;
 	for (int i = 0; i < heightFigure; i++)
@@ -27,7 +28,7 @@ bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
 			}
 		}
 	}
-	if (checkNextLine && shiftY)
+	if (checkNextLine && shiftY)    // add new method
 	{
 		for (int i = 0; i < COORDINATE_F; i++)
 			pFigure->Coordinate[i].y += shiftY;
@@ -45,12 +46,12 @@ void GameLogic::lowerTheMap(Map* pMap, int numOfLine)
 {
 	for (int i = numOfLine; i != 0; i--)
 	{
-		for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4)+1); j++)
+		for (int j = 0; j < ((G_COORDINATE_X / 2) + ((G_COORDINATE_X / 2) / 4)+1); j++)
 		{
-			if (pMap->getFeguresMap(i, j) > 0)
+			if (pMap->getFiguresMap(i, j) > 0)
 			{
-				pMap->setFeguresMap((i + 1), j, pMap->getFeguresMap(i, j));
-				pMap->setFeguresMap(i, j, 0);
+				pMap->setFiguresMap((i + 1), j, pMap->getFiguresMap(i, j));
+				pMap->setFiguresMap(i, j, 0);
 			}
 		}
 	}
@@ -59,17 +60,17 @@ void GameLogic::lowerTheMap(Map* pMap, int numOfLine)
 int GameLogic::LineDeletion(Map* pMap, int& countLines)
 {
 	int countIconsInLine = 0;
-	for (int i = 1; i < COORDINATE_Y; i++)
+	for (int i = 1; i < G_COORDINATE_Y; i++)
 	{
 		countIconsInLine = 0;
-		for (int j = 0; j < ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4) + 1); j++)
+		for (int j = 0; j < (G_CENTER_OF_MAP + 1); j++)
 		{
-			pMap->getFeguresMap(i, j) ? countIconsInLine++ : countIconsInLine = 0;
-			if (countIconsInLine == ((COORDINATE_X / 2) + ((COORDINATE_X / 2) / 4) - 1))
+			pMap->getFiguresMap(i, j) ? countIconsInLine++ : countIconsInLine = 0;
+			if (countIconsInLine == ((G_COORDINATE_X / 2) + ((G_COORDINATE_X / 2) / 4) - 1))
 			{
 				while (j)
 				{
-					pMap->setFeguresMap(i, j, 0);
+					pMap->setFiguresMap(i, j, 0);
 					--j;
 				}
 				countLines++;
@@ -93,9 +94,9 @@ int GameLogic::lineRemovalAssembly(Map* pMap)
 
 void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
 {
-	if (_kbhit())
-	{	
-		ch = _getch();
+	if (OsHelper::m_kbhit())
+	{
+	    ch = OsHelper::m_getch();
 		switch (ch)
 		{
 		case 'a': 
@@ -129,7 +130,7 @@ bool GameLogic::gameover(Map* pMap, Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = pFigure->heightFigure; j > 0 ; j--)
-			if (pMap->getFeguresMap(j, pFigure->Coordinate[i].x) > 0)
+			if (pMap->getFiguresMap(j, pFigure->Coordinate[i].x) > 0)
 				return true;
 	return false;
 }

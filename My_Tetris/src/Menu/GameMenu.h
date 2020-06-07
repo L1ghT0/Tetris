@@ -1,11 +1,10 @@
 #pragma once
 #include <iostream>
-#include <Windows.h>
-#include <conio.h>
 #include <string>
 #include <vector>
 #include <fstream>
-#include "PlayTetris.h"
+#include "../Play/PlayTetris.h"
+#include "../OsHelper.h"
 
 class GameMenu : public PlayTetris
 {
@@ -26,7 +25,6 @@ private:
 	bool itMenu;
 
 	std::string path;
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::vector<std::string> vMenu;
 	std::vector<std::string> vDifficulty;
 };
