@@ -25,26 +25,25 @@ Figure::Figure()
 Figure::~Figure() = default;
 
 void Figure::inverse(Figure* pFigure)
-{   // Fix inverse
+{
 	int count = 0;
-	short bar[COORDINATE_F][COORDINATE_F];
-	for (int i = 0; i < COORDINATE_F; i++)
-		for (int j = 0; j < COORDINATE_F; j++)
-			bar[i][j] = pFigure->ThisFigure[i][j].icon;
+	short tempMap[COORDINATE_F][COORDINATE_F];
 
 	for (int i = 0; i < COORDINATE_F; i++)
-		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--)
-			pFigure->ThisFigure[i][j].icon = bar[k][i];
+		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--) {
+            tempMap[i][j] = pFigure->ThisFigure[k][i].icon;
+            pFigure->ThisFigure[k][i].icon = 0;
+        }
 
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
 		for (int j = 0; j < COORDINATE_F; j++)
 		{
 			count = (COORDINATE_F - pFigure->heightFigure);
-			if (pFigure->ThisFigure[i][j].icon)
+			if (tempMap[i][j])
 			{
-				pFigure->ThisFigure[i][j-count].icon = 219 + 255 * (getColor());
-				pFigure->ThisFigure[i][j].icon = 0;
+                pFigure->ThisFigure[i][j-count].icon = tempMap[i][j-count] = 219 + 255*(getColor());
+                pFigure->ThisFigure[i][j].icon = 0;
 			}
 		}
 	}
