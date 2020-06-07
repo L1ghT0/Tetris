@@ -1,5 +1,6 @@
 #include "Figure.h"
 #include "../Map/Map.h"
+#include "../Factory/Factory.h"
 
 Figure::Figure()
 {
@@ -21,6 +22,8 @@ Figure::Figure()
 	}
 }
 
+Figure::~Figure() = default;
+
 void Figure::inverse(Figure* pFigure)
 {   // Fix inverse
 	int count = 0;
@@ -28,7 +31,7 @@ void Figure::inverse(Figure* pFigure)
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0; j < COORDINATE_F; j++)
 			bar[i][j] = pFigure->ThisFigure[i][j].icon;
-	
+
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--)
 			pFigure->ThisFigure[i][j].icon = bar[k][i];
@@ -50,13 +53,11 @@ void Figure::inverse(Figure* pFigure)
 	pFigure->widthFigure = temp;
 }
 
-void Figure::setColor(int color)
-{
+void Figure::setColor(int color) {
 	color == 7 ? this->color = (color+3) : this->color = color;	// "7" - defaults color
 }
 
-int Figure::getColor()
-{
+int Figure::getColor() {
 	return this->color;
 }
 
@@ -66,5 +67,11 @@ int Figure::getHeightFigure() {
 
 int Figure::getWidthFigure() {
     return this->widthFigure;
+}
+
+Figure *Figure::createFigure() {
+    Figure* figure = Factory::figures();
+    figure->push_figure();
+    return figure;
 }
 

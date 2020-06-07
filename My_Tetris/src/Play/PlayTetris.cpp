@@ -10,8 +10,7 @@ PlayTetris::PlayTetris()
 int PlayTetris::play(int difficulty)
 {
 	difficulty = 450 - (difficulty * 95);
-	Figure* pFigure = Factory::figures();
-	pFigure->push_figure();
+	Figure* pFigure = Figure::createFigure();
 
 	std::thread th([&](){
         while (!GameOver)
@@ -29,8 +28,7 @@ int PlayTetris::play(int difficulty)
 			map.saveFigureOnMap(pFigure);
 			this->score += gameLogic.lineRemovalAssembly(&map);
 			delete pFigure;
-			pFigure = Factory::figures();
-			pFigure->push_figure();
+			pFigure = Figure::createFigure();
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(difficulty));
 		checkFall = gameLogic.shiftFigure(pFigure, &map, pFigure->getHeightFigure(), 0, 1);
