@@ -9,8 +9,7 @@ int main()
 
     return 0;
     /* NEED to Add(Fix):
-     * 1. new Method                 in GameLogic
-     * 2. Change name of struct      in Figure
-     * 3. Change method and logic    in GameMenu
+     * 1. Change name of struct      in Figure
+     * 2. Change method and logic    in GameMenu
      */
 }

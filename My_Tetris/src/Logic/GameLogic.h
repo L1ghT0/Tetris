@@ -10,13 +10,14 @@ public:
 	GameLogic();
 	~GameLogic();
 	 
-	bool shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY);
+	bool checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY);
 	int lineRemovalAssembly(Map* pMap);
 
 	void input(bool& GameOver, Figure* pFigure, Map* pMap);
 	bool gameover(Map* pMap, Figure* pFigure);
 
 private:
+    bool shiftFigure(Figure*, bool, int, int);
 	void lowerTheMap(Map* pMap, int numOfLine);
 	int LineDeletion(Map* pMap, int& countLines);
 

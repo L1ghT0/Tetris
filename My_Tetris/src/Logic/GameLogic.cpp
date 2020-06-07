@@ -4,7 +4,7 @@
 GameLogic::GameLogic(){}
 GameLogic::~GameLogic(){}
 
-bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
+bool GameLogic::checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
                             const int shiftX, const int shiftY)
 {
 	checkNextLine = false;
@@ -16,7 +16,7 @@ bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
 			{
 				if (pMap->getMap((pFigure->Coordinate[i].y + (shiftY)), pFigure->Coordinate[j].x) == ' ')
 					checkNextLine = true;
-				else 
+				else
 					return false;
 			}
 			else if (pFigure->ThisFigure[i][j].icon > 0 && pFigure->ThisFigure[i][j + (shiftX)].icon <= 0 && shiftX != 0)
@@ -28,18 +28,25 @@ bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
 			}
 		}
 	}
-	if (checkNextLine && shiftY)    // add new method
-	{
-		for (int i = 0; i < COORDINATE_F; i++)
-			pFigure->Coordinate[i].y += shiftY;
-		return true;
-	}
-	else if (checkNextLine && shiftX != 0)
-	{
-		for (int i = 0; i < COORDINATE_F; i++)
-			pFigure->Coordinate[i].x += (shiftX);
-		return false;
-	}
+	return shiftFigure(pFigure, checkNextLine, shiftX, shiftY);
+}
+
+bool GameLogic::shiftFigure(Figure* pFigure, const bool nextLine, int shiftX, int shiftY)
+{
+    bool res = false;
+    if (nextLine && shiftY)
+    {
+        for (int i = 0; i < COORDINATE_F; i++)
+            pFigure->Coordinate[i].y += shiftY;
+        res = true;
+    }
+    else if (nextLine && shiftX)
+    {
+        for (int i = 0; i < COORDINATE_F; i++)
+            pFigure->Coordinate[i].x += (shiftX);
+        res = false;
+    }
+    return res;
 }
 
 void GameLogic::lowerTheMap(Map* pMap, int numOfLine)
@@ -99,20 +106,20 @@ void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
 	    ch = OsHelper::m_getch();
 		switch (ch)
 		{
-		case 'a': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), -1, 0);
+		case 'a':
+			GameLogic::checkShiftFigure(pFigure, pMap, pFigure->getHeightFigure(), -1, 0);
 			break;
-		case 'd': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 1, 0);
+		case 'd':
+			GameLogic::checkShiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 1, 0);
 			break;
-		case 's': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 0, 1);
+		case 's':
+			GameLogic::checkShiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 0, 1);
 			break;
-		case 'q': 
+		case 'q':
 			pFigure->inverse(pFigure);
 			break;
-		case '`': 
-			GameOver = true; 
+		case '`':
+			GameOver = true;
 			break;
 		}
 	}
