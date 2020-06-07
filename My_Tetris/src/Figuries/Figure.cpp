@@ -60,3 +60,11 @@ int Figure::getColor()
 	return this->color;
 }
 
+int Figure::getHeightFigure() {
+    return this->heightFigure;
+}
+
+int Figure::getWidthFigure() {
+    return this->widthFigure;
+}
+

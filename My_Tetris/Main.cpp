@@ -8,14 +8,12 @@ int main()
 	gameTetris.mainMenu();
 
     return 0;
-    /* NEED Add(Fix):
+    /* NEED to Add(Fix):
      * 1. Fix inverse                in Figure
      * 2. Destructor Figure          in Figure
-     * 3. Getter widthFigure         in Figure
-     * 4. Getter heightFigure        in Figure
-     * 5. Method createFigure        in Figure
-     * 6. new Method                 in GameLogic
-     * 7. Change name of struct      in Figure
-     * 8. Change method and logic    in GameMenu
+     * 3. Method createFigure        in Figure
+     * 4. new Method                 in GameLogic
+     * 5. Change name of struct      in Figure
+     * 6. Change method and logic    in GameMenu
      */
 }

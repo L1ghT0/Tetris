@@ -33,7 +33,7 @@ int PlayTetris::play(int difficulty)
 			pFigure->push_figure();
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(difficulty));
-		checkFall = gameLogic.shiftFigure(pFigure, &map, pFigure->heightFigure, 0, 1);
+		checkFall = gameLogic.shiftFigure(pFigure, &map, pFigure->getHeightFigure(), 0, 1);
 		GameOver = gameLogic.gameover(&map, pFigure);
 	}
 	th.join();
@@ -43,9 +43,6 @@ int PlayTetris::play(int difficulty)
 }
 
 
-void PlayTetris::foo(int x) {
-
-}
 
 
 

@@ -8,7 +8,7 @@ bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure,
                             const int shiftX, const int shiftY)
 {
 	checkNextLine = false;
-	for (int i = 0; i < heightFigure; i++)
+	for (int i = 0; i < pFigure->getHeightFigure(); i++)
 	{
 		for (int j = 0; j < COORDINATE_F; j++)
 		{
@@ -100,13 +100,13 @@ void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
 		switch (ch)
 		{
 		case 'a': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, -1, 0);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), -1, 0);
 			break;
 		case 'd': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, 1, 0);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 1, 0);
 			break;
 		case 's': 
-			GameLogic::shiftFigure(pFigure, pMap, pFigure->heightFigure, 0, 1);
+			GameLogic::shiftFigure(pFigure, pMap, pFigure->getHeightFigure(), 0, 1);
 			break;
 		case 'q': 
 			pFigure->inverse(pFigure);
@@ -129,7 +129,7 @@ int GameLogic::increaseScore(int lines)
 bool GameLogic::gameover(Map* pMap, Figure* pFigure)
 {
 	for (int i = 0; i < COORDINATE_F; i++)
-		for (int j = pFigure->heightFigure; j > 0 ; j--)
+		for (int j = pFigure->getHeightFigure(); j > 0 ; j--)
 			if (pMap->getFiguresMap(j, pFigure->Coordinate[i].x) > 0)
 				return true;
 	return false;

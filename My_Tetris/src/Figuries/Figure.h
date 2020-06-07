@@ -21,10 +21,13 @@ public:
 		int y;
 	}Coordinate[COORDINATE_F];
 
-	int heightFigure;   // add getter
-	int widthFigure;    // add getter
+	int getHeightFigure();
+	int getWidthFigure() ;
 
 private:
 	int color;
+protected:
+    int widthFigure;
+    int heightFigure;
 };
 

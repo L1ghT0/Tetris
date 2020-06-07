@@ -17,7 +17,6 @@ public:
 	int play(int difficulty);
 
 private:
-    static void foo(int x);
 	Map map;
 	GameLogic gameLogic;
 	bool GameOver;
