@@ -7,14 +7,15 @@
 #include "../Figuries/Figure.h"
 #include "../Factory/Factory.h"
 #include "../OsHelper.h"
+#include "IGame.h"
 #include <thread>
 
 
-class PlayTetris
+class PlayTetris : public IGame
 {
 public:
 	PlayTetris();
-	int play(int difficulty);
+	int play(int difficulty) override;
 
 private:
 	Map map;

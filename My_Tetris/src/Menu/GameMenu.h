@@ -4,13 +4,14 @@
 #include <vector>
 #include <fstream>
 #include "../Play/PlayTetris.h"
+#include "IGame.h"
 #include "../OsHelper.h"
 
 class GameMenu : public PlayTetris
 {
 public:
 	GameMenu();
-	void mainMenu();
+	void mainMenu(IGame* game);
 
 private:
 

@@ -15,7 +15,7 @@ GameMenu::GameMenu()
 	vDifficulty.push_back("Back");
 }
 
-void GameMenu::mainMenu()
+void GameMenu::mainMenu(IGame* game)
 {
 	GameMenu::print(vMenu);
 	while (input != '`')
