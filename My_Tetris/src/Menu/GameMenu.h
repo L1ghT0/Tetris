@@ -14,15 +14,15 @@ public:
 	void mainMenu(IGame* game);
 
 private:
-
 	void print(std::vector<std::string> vec);
-	void choice(std::vector<std::string> vec);
-	void checkInput(std::vector<std::string> vec);
+	void checkInput(std::vector<std::string> vec, IGame* game);
 	void writeToFile(int score);
 	void readFile();
+    void enterClick(std::vector<std::string>, IGame* game);
+    void startGame(IGame *game, int difficulty);
 
 	char input;
-	int count;
+	int lineCount;
 	bool itMenu;
 
 	std::string path;

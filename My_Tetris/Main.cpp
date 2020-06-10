@@ -1,15 +1,15 @@
 ﻿#include "GameMenu.h"
+#include "PlayTetris.h"
 int main()
 {
-	setlocale(LC_ALL, "C");
+	setlocale(LC_ALL, "C"); // IBM cp866
 	srand(time(NULL));
 
-	GameMenu gameTetris;
-	gameTetris.mainMenu();
+
+	PlayTetris* tetris = new PlayTetris;
+	GameMenu menuForGame;
+    menuForGame.mainMenu(tetris);
+    delete tetris;
 
     return 0;
-    /* NEED to Add(Fix):
-     * 1. Change name of struct      in Figure
-     * 2. Change method and logic    in GameMenu
-     */
 }

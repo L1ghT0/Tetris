@@ -15,30 +15,30 @@
 #endif
 
 class OsHelper {
-//    static void input_enter_off() {
-//        struct termios t;
-//        tcgetattr(STDIN_FILENO, &t);
-//            t.c_lflag &= ~ICANON;
-//            tcsetattr(STDIN_FILENO, TCSANOW, &t);
-//        }
-//
-//        static void input_enter_on() {
-//            struct termios t;
-//            tcgetattr(STDIN_FILENO, &t);
-//            t.c_lflag |= ICANON;
-//            tcsetattr(STDIN_FILENO, TCSANOW, &t);
-//        }
+private:
+    static void input_enter_off() {
+        struct termios t;
+        tcgetattr(STDIN_FILENO, &t);
+            t.c_lflag &= ~ICANON;
+            tcsetattr(STDIN_FILENO, TCSANOW, &t);
+        }
+
+        static void input_enter_on() {
+            struct termios t;
+            tcgetattr(STDIN_FILENO, &t);
+            t.c_lflag |= ICANON;
+            tcsetattr(STDIN_FILENO, TCSANOW, &t);
+        }
 public:
 
     static char m_getch(){
 #ifdef __linux__
-        char c = getchar();
-       // OsHelper::input_enter_on();
-       // OsHelper::input_enter_off();
+        OsHelper::input_enter_on();
+        OsHelper::input_enter_off();
+        return getchar();
 #else
-        char c = _getch();
+        return _getch();
 #endif
-        return c;
     }
     static void m_sysCLaer(){
 #ifdef __linux__
