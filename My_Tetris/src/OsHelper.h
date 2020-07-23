@@ -49,6 +49,29 @@ public:
     }
     static void change_color(const int lineBackColor, const int fontColor){
 #ifdef __linux__
+        switch (fontColor) {
+            case 1:
+                std::cout << "\033[1;31m\033[10m";
+                break;
+            case 2:
+                std::cout << "\033[1;32m\033[10m";
+                break;
+            case 3:
+                std::cout << "\033[1;33m\033[10m";
+                break;
+            case 4:
+                std::cout << "\033[1;34m\033[10m";
+                break;
+            case 5:
+                std::cout << "\033[1;35m\033[10m";
+                break;
+            case 6:
+                std::cout << "\033[1;36m\033[10m";
+                break;
+            case 7:
+                std::cout << "\033[1;37m\033[10m";
+                break;
+        }
 #else
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(hConsole, (WORD)((lineBackColor << 4) | fontColor));
@@ -56,6 +79,7 @@ public:
     }
     static void reset_color(){
 #ifdef __linux__
+        std::cout <<"\033[1;31m\033[0m";
 #else
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(hConsole, (WORD)((0 << 4) | 7));

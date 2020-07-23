@@ -53,7 +53,7 @@ void Figure::inverse(Figure* pFigure)
 }
 
 void Figure::setColor(int color) {
-	color == 7 ? this->color = (color+3) : this->color = color;	// "7" - defaults color
+	this->color = color;
 }
 
 int Figure::getColor() {
