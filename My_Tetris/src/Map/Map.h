@@ -13,7 +13,7 @@ public:
 
 	Map();
 	void addOnMap(Figure* pFigure);
-	void Print_map(int score);
+	void Print_map();
 	void saveFigureOnMap(Figure* pFigure);
 	
 	short getMap(int x, int y);

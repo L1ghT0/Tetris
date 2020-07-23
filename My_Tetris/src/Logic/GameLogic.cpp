@@ -28,10 +28,10 @@ bool GameLogic::checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFi
 			}
 		}
 	}
-	return shiftFigure(pFigure, checkNextLine, shiftX, shiftY);
+	return shiftFigure(pFigure, pMap, checkNextLine, shiftX, shiftY);
 }
 
-bool GameLogic::shiftFigure(Figure* pFigure, const bool nextLine, int shiftX, int shiftY)
+bool GameLogic::shiftFigure(Figure* pFigure, Map* pMap, const bool nextLine, int shiftX, int shiftY)
 {
     bool res = false;
     if (nextLine && shiftY)
@@ -46,6 +46,8 @@ bool GameLogic::shiftFigure(Figure* pFigure, const bool nextLine, int shiftX, in
             pFigure->Coordinate[i].x += (shiftX);
         res = false;
     }
+    pMap->addOnMap(pFigure);
+    pMap->Print_map();
     return res;
 }
 
@@ -117,6 +119,8 @@ void GameLogic::input(bool& GameOver, Figure* pFigure, Map* pMap)
 			break;
 		case 'q':
 			pFigure->inverse(pFigure);
+			pMap->addOnMap(pFigure);
+			pMap->Print_map();
 			break;
 		case '`':
 			GameOver = true;

@@ -17,7 +17,7 @@ public:
 	bool gameover(Map* pMap, Figure* pFigure);
 
 private:
-    bool shiftFigure(Figure*, bool, int, int);
+    bool shiftFigure(Figure*, Map*, bool, int, int);
 	void lowerTheMap(Map* pMap, int numOfLine);
 	int LineDeletion(Map* pMap, int& countLines);
 

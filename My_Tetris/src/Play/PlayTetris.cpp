@@ -17,7 +17,6 @@ int PlayTetris::play(int difficulty)
         {
             gameLogic.input(GameOver, pFigure, &map);
             map.addOnMap(pFigure);
-            map.Print_map(this->score);
         }
 	});
 

@@ -49,7 +49,7 @@ void Map::addOnMap(Figure* pFigure)
 	}
 }
 
-void Map::Print_map(int score)
+void Map::Print_map()
 {
 	OsHelper::m_sysCLaer();
 	for (int i = 0; i < G_COORDINATE_Y; i++)
@@ -68,7 +68,7 @@ void Map::Print_map(int score)
 		}
 		std::cout << std::endl;
 	}
-	std::cout << score << std::endl;
+	//std::cout << score << std::endl;
 }
 
 void Map::saveFigureOnMap(Figure* pFigure)
