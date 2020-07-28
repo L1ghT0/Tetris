@@ -12,16 +12,16 @@ bool GameLogic::checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFi
 	{
 		for (int j = 0; j < COORDINATE_F; j++)
 		{
-			if (pFigure->ThisFigure[i][j].icon > 0 && pFigure->ThisFigure[i + (shiftY)][j].icon <= 0 && shiftY)
+			if (pFigure->FigureElement[i][j].symbolFigure > 0 && pFigure->FigureElement[i + (shiftY)][j].symbolFigure <= 0 && shiftY)
 			{
-				if (pMap->getMap((pFigure->Coordinate[i].y + (shiftY)), pFigure->Coordinate[j].x) == ' ')
+				if (pMap->getMap((pFigure->Coordinate[i].y + (shiftY)), pFigure->Coordinate[j].x) == " ")
 					checkNextLine = true;
 				else
 					return false;
 			}
-			else if (pFigure->ThisFigure[i][j].icon > 0 && pFigure->ThisFigure[i][j + (shiftX)].icon <= 0 && shiftX != 0)
+			else if (pFigure->FigureElement[i][j].symbolFigure > 0 && pFigure->FigureElement[i][j + (shiftX)].symbolFigure <= 0 && shiftX != 0)
 			{
-				if (pMap->getMap(pFigure->Coordinate[i].y, pFigure->Coordinate[j].x + (shiftX)) == ' ')
+				if (pMap->getMap(pFigure->Coordinate[i].y, pFigure->Coordinate[j].x + (shiftX)) == " ")
 					checkNextLine = true;
 				else
 					return false;
@@ -55,7 +55,7 @@ void GameLogic::lowerTheMap(Map* pMap, int numOfLine)
 {
 	for (int i = numOfLine; i != 0; i--)
 	{
-		for (int j = 0; j < ((G_COORDINATE_X / 2) + ((G_COORDINATE_X / 2) / 4)+1); j++)
+		for (int j = 0; j < (G_CENTER_LINE_OF_THE_MAP+1); j++)
 		{
 			if (pMap->getFiguresMap(i, j) > 0)
 			{
@@ -72,7 +72,7 @@ int GameLogic::LineDeletion(Map* pMap, int& countLines)
 	for (int i = 1; i < G_COORDINATE_Y; i++)
 	{
 		countIconsInLine = 0;
-		for (int j = 0; j < (G_CENTER_OF_MAP + 1); j++)
+		for (int j = 0; j < (G_CENTER_LINE_OF_THE_MAP + 1); j++)
 		{
 			pMap->getFiguresMap(i, j) ? countIconsInLine++ : countIconsInLine = 0;
 			if (countIconsInLine == ((G_COORDINATE_X / 2) + ((G_COORDINATE_X / 2) / 4) - 1))

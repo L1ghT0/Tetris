@@ -11,7 +11,6 @@ int PlayTetris::play(int difficulty)
 {
 	difficulty = 450 - (difficulty * 95);
 	Figure* pFigure = Figure::createFigure();
-
 	std::thread th([&](){
         while (!GameOver)
         {

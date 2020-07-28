@@ -1,14 +1,15 @@
 ﻿#include "GameMenu.h"
 #include "PlayTetris.h"
+
 int main()
 {
 	setlocale(LC_ALL, "C");
     //setlocale(LC_CTYPE,"");
 	srand(time(NULL));
 
-    char* x[5][5] = {};
+    //char* x[5][5] = {};
 //	x[0][0] = " ";
-	x[0][1] = "\u2586";
+//	x[0][1] = "\u2586";
 //    int b = 31;
 //	//std::cout << "this is space:"<<x[0][0] <<"YeaH!"  << '\n' << x[0][1] << '\n';
 //   // x[0][2] = "\033[1;30m\u2586\033[0m";

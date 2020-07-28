@@ -10,7 +10,7 @@ L_Figure::L_Figure()
 void L_Figure::push_figure()
 {
 	for (int i = 0; i < heightFigure; i++)
-		ThisFigure[i][0].icon = 219 + 255 * (getColor());
-	ThisFigure[2][1].icon = 219 + 255 * (getColor());
+        FigureElement[i][0].symbolFigure = 219 + 255 * (getColor());
+    FigureElement[2][1].symbolFigure = 219 + 255 * (getColor());
 }
 

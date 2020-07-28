@@ -8,8 +8,8 @@ Z_Figure::Z_Figure()
 
 void Z_Figure::push_figure()
 {
-	ThisFigure[0][1].icon = 219 + 255 * (getColor());
-	ThisFigure[1][0].icon = 219 + 255 * (getColor());
-	ThisFigure[1][1].icon = 219 + 255 * (getColor());
-	ThisFigure[2][0].icon = 219 + 255 * (getColor());
+    FigureElement[0][1].symbolFigure = 219 + 255 * (getColor());
+    FigureElement[1][0].symbolFigure = 219 + 255 * (getColor());
+    FigureElement[1][1].symbolFigure = 219 + 255 * (getColor());
+    FigureElement[2][0].symbolFigure = 219 + 255 * (getColor());
 }

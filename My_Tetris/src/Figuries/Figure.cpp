@@ -8,7 +8,7 @@ Figure::Figure()
 	widthFigure = 0;
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0; j < COORDINATE_F; j++)
-			ThisFigure[i][j].icon = 0;
+            FigureElement[i][j].symbolFigure = 0;
 
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
@@ -17,8 +17,8 @@ Figure::Figure()
 	}
 	for (int i = 0; i < COORDINATE_F; i++)
 	{
-		Coordinate[i].x = (((G_COORDINATE_X / 2) + (G_COORDINATE_X / 2 / 4)) / 2) + i;
-		Coordinate[i].y = i + 1;
+		Coordinate[i].x = (G_CENTER_LINE_OF_THE_MAP / 2) + i;
+		Coordinate[i].y = i;
 	}
 }
 
@@ -31,8 +31,8 @@ void Figure::inverse(Figure* pFigure)
 
 	for (int i = 0; i < COORDINATE_F; i++)
 		for (int j = 0, k = COORDINATE_F - 1; j < COORDINATE_F; j++, k--) {
-            tempMap[i][j] = pFigure->ThisFigure[k][i].icon;
-            pFigure->ThisFigure[k][i].icon = 0;
+            tempMap[i][j] = pFigure->FigureElement[k][i].symbolFigure;
+            pFigure->FigureElement[k][i].symbolFigure = 0;
         }
 
 	for (int i = 0; i < COORDINATE_F; i++)
@@ -42,8 +42,8 @@ void Figure::inverse(Figure* pFigure)
 			count = (COORDINATE_F - pFigure->heightFigure);
 			if (tempMap[i][j])
 			{
-                pFigure->ThisFigure[i][j-count].icon = tempMap[i][j-count] = 219 + 255*(getColor());
-                pFigure->ThisFigure[i][j].icon = 0;
+                pFigure->FigureElement[i][j-count].symbolFigure = tempMap[i][j-count] = getColor();//219 + 255*(getColor());
+                pFigure->FigureElement[i][j].symbolFigure = 0;
 			}
 		}
 	}

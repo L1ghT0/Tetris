@@ -17,8 +17,8 @@ public:
 
     struct
     {
-        short icon;
-    }ThisFigure[COORDINATE_F][COORDINATE_F];
+        short symbolFigure; // symbol
+    }FigureElement[COORDINATE_F][COORDINATE_F]; // FigureElement
     struct
     {
         int x;
