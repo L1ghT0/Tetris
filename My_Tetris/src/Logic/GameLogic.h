@@ -1,4 +1,5 @@
 #pragma once
+#include <mutex>
 #include "../Figuries/Figure.h"
 #include "../Map/Map.h"
 #include "../OsHelper.h"
@@ -10,15 +11,15 @@ public:
 	GameLogic();
 	~GameLogic();
 	 
-	bool checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY);
+    bool shiftFigure(Figure*, Map*, int, int);
 	int lineRemovalAssembly(Map* pMap);
 
-	void input(bool& GameOver, Figure* pFigure, Map* pMap);
+    void input(bool& GameOver, Figure* pFigure, Map* pMap);
 	bool gameover(Map* pMap, Figure* pFigure);
 
 private:
-    bool shiftFigure(Figure*, Map*, bool, int, int);
-	void lowerTheMap(Map* pMap, int numOfLine);
+    bool checkShiftFigure(Figure* pFigure, Map* pMap, const int& heightFigure, int shiftX, int shiftY);
+    void lowerTheMap(Map* pMap, int numOfLine);
 	int LineDeletion(Map* pMap, int& countLines);
 
 	int increaseScore(int lines);

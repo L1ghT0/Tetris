@@ -8,7 +8,7 @@ Map::Map()
 	
 	for (int i = 0; i < G_COORDINATE_Y; i++)
 		for (int j = 0; j < G_COORDINATE_X; j++)
-            mapForStoppedFigures[i][j] = 0; // 123
+            mapForStoppedFigures[i][j] = 0;
 }
 
 void Map::addOnMap(Figure* pFigure)
@@ -22,7 +22,6 @@ void Map::addOnMap(Figure* pFigure)
 				map[i][j].symbol = "\u2588";
 				AddFigure = true;
 			}
-
 			if (i == 0)
 				map[i][j].symbol = "\u2583";
             else if(i == (G_COORDINATE_Y-1))

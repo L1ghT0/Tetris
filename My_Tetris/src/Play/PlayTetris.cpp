@@ -29,7 +29,7 @@ int PlayTetris::play(int difficulty)
 			pFigure = Figure::createFigure();
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(difficulty));
-		checkFall = gameLogic.checkShiftFigure(pFigure, &map, pFigure->getHeightFigure(), 0, 1);
+		checkFall = gameLogic.shiftFigure(pFigure, &map, 0, 1);
 		GameOver = gameLogic.gameover(&map, pFigure);
 	}
 	th.join();
