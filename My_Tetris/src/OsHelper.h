@@ -16,6 +16,7 @@
 
 class OsHelper {
 private:
+#ifdef __linux__
     static void input_enter_off() {
         struct termios t;
         tcgetattr(STDIN_FILENO, &t);
@@ -29,6 +30,7 @@ private:
             t.c_lflag |= ICANON;
             tcsetattr(STDIN_FILENO, TCSANOW, &t);
         }
+#endif
 public:
 
     static char m_getch(){
@@ -112,7 +114,7 @@ public:
             return 0;
         }
 #else
-        _kbhit();
+        return _kbhit();
 #endif
     }
 

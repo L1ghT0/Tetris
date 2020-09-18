@@ -15,11 +15,11 @@ public:
 
     static Figure* createFigure();
 
-    struct
+    struct     // Move to Protected
     {
         short symbolFigure; // symbol
     }FigureElement[COORDINATE_F][COORDINATE_F]; // FigureElement
-    struct
+    struct     // Move to Protected
     {
         int x;
         int y;

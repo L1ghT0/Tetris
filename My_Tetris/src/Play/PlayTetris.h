@@ -1,6 +1,6 @@
 #pragma once
 #include <ctime>
-#include <pthread.h>
+//#include <pthread.h>
 #include <thread>
 #include "../Map/Map.h"
 #include "../Logic/GameLogic.h"

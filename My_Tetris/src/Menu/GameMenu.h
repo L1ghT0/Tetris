@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "../Play/PlayTetris.h"
-#include "IGame.h"
+#include "../Play/IGame.h"
 #include "../OsHelper.h"
 
 class GameMenu : public PlayTetris

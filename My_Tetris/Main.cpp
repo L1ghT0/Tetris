@@ -1,12 +1,8 @@
-﻿#include "GameMenu.h"
-#include "PlayTetris.h"
-
+﻿#include "src/Menu/GameMenu.h"
+#include "src/Play/PlayTetris.h"
 
 int main()
 {
-	setlocale(LC_ALL, "C");
-	srand(time(NULL));
-
 	PlayTetris* tetris = new PlayTetris;
 	GameMenu menuForGame;
     menuForGame.mainMenu(tetris);

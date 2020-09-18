@@ -6,7 +6,7 @@
 
 const int G_COORDINATE_X = 22;
 const int G_COORDINATE_Y = 20;
-const int G_CENTER_LINE_OF_THE_MAP = ((G_COORDINATE_X/2)+ ((G_COORDINATE_X / 2)/4));/*(14)*/
+const int G_CENTER_LINE_OF_THE_MAP = ((G_COORDINATE_X/2)+ ((G_COORDINATE_X / 2)/4)); // == 14
 
 class Map
 {
@@ -28,6 +28,6 @@ public:
 private:
 	short icon;
 	bool AddFigure;
-    [[maybe_unused]] bool mapForStoppedFigures[G_COORDINATE_Y][G_COORDINATE_X];
+    bool mapForStoppedFigures[G_COORDINATE_Y][G_COORDINATE_X];
     MapElement map[G_COORDINATE_Y][G_COORDINATE_X];
 };

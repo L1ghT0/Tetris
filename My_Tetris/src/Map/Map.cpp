@@ -100,7 +100,7 @@ std::string Map::getMap(const int y, const int x)
 
 short Map::getFiguresMap(const int y, const int x)
 {
-	return this->mapForStoppedFigures[y][x]; // 123
+	return this->mapForStoppedFigures[y][x];
 }
 
 void Map::setFiguresMap(const int y, const int x, const short icon)

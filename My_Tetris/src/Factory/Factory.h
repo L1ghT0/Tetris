@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream> // for "rand()"
-#include "Figure.h"
-#include "L_Figure.h"
-#include "Back_L_Figure.h"
-#include "Z_Figure.h"
-#include "Back_Z_Figure.h"
-#include "Line_Figure.h"
-#include "Square_Figure.h"
-#include "T_Figure.h"
+#include "../Figuries/Figure.h"
+#include "../Figuries/L_Figure.h"
+#include "../Figuries/Back_L_Figure.h"
+#include "../Figuries/Z_Figure.h"
+#include "../Figuries/Back_Z_Figure.h"
+#include "../Figuries/Line_Figure.h"
+#include "../Figuries/Square_Figure.h"
+#include "../Figuries/T_Figure.h"
 
 class Factory
 {
