@@ -2,6 +2,7 @@
 
 Figure* Factory::figures()
 {
+	srand(time(NULL));
 	Figure* figure = nullptr;
 	int random = rand() % 7;
 	int color = (random+1);

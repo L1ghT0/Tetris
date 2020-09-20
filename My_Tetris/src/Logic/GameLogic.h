@@ -22,6 +22,7 @@ private:
     void lowerTheMap(Map* pMap, int numOfLine);
 	int LineDeletion(Map* pMap, int& countLines);
 
+	std::mutex mtx;
 	int increaseScore(int lines);
 	bool checkNextLine;
 	char ch;

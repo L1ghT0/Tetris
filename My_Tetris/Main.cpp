@@ -4,8 +4,8 @@
 int main()
 {
 	PlayTetris* tetris = new PlayTetris;
-	GameMenu menuForGame;
-    menuForGame.mainMenu(tetris);
+	GameMenu menu;
+    menu.mainMenu(tetris);
     delete tetris;
 
     return 0;

@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream> // for "rand()"
+#include <cstdlib>
+#include <ctime>
 #include "../Figuries/Figure.h"
 #include "../Figuries/L_Figure.h"
 #include "../Figuries/Back_L_Figure.h"
