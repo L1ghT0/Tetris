@@ -1,7 +1,7 @@
 # Tetris
 This is a **console** Tetris. Works on Linux and Windows operating systems.  
 Linux screenshot:  
-![alt text](/../<mater>Screenshots/TetriScreenLinux.png)
+![alt text](/My_Tetris/Screenshots/TetriScreenLinux.png)
 ## How to install
 To do :(
 ## How to start the game
