@@ -11,10 +11,10 @@
 #include <thread>
 
 
-class PlayTetris : public IGame
+class Tetris : public IGame
 {
 public:
-	PlayTetris();
+	Tetris();
 	int play(int difficulty) override;
 
 private:

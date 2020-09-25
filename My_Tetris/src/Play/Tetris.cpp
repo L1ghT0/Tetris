@@ -1,13 +1,13 @@
-#include "PlayTetris.h"
+#include "Tetris.h"
 
-PlayTetris::PlayTetris()
+Tetris::Tetris()
 {
 	GameOver = false;
 	checkFall = true;
 	score = 0;
 }
 
-int PlayTetris::play(int difficulty)
+int Tetris::play(int difficulty)
 {
 	difficulty = 450 - (difficulty * 95);
 	Figure* pFigure = Figure::createFigure();

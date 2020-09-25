@@ -3,11 +3,11 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "../Play/PlayTetris.h"
+#include "../Play/Tetris.h"
 #include "../Play/IGame.h"
 #include "../OsHelper.h"
 
-class GameMenu : public PlayTetris
+class GameMenu : public Tetris
 {
 public:
 	GameMenu();
